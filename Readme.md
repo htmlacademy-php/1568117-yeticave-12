@@ -1,7 +1,7 @@
 # Личный проект «YetiCave»
 
 * Студент: [Олег](https://up.htmlacademy.ru/php/12/user/1568117).
-* Наставник: `Неизвестно`.
+* Наставник: [Владимир Рекман](https://htmlacademy.ru/profile/id1129785).
 
 ---
 
