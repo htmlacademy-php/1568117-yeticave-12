@@ -35,11 +35,23 @@ $lots = [
     [
         'lot_name' => 'Маска Oakley Canopy',
         'lot_category' => 'Разное',
-        'lot_price' => 5400,
+        'lot_price' => 1400,
         'lot_url_image' => 'img/lot-6.jpg'
     ]
 ];
 $user_name = 'Олег'; // укажите здесь ваше имя
+
+function change_format_price($old_format_price) {
+    $round_number = ceil($old_format_price);
+    if ($round_number >= 1000) {
+        $new_format_price = number_format($old_format_price, 0, '.', ' ') . " ₽";
+    }
+    else {
+        $new_format_price = $round_number . " ₽";
+    }
+    return $new_format_price;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -117,7 +129,7 @@ $user_name = 'Олег'; // укажите здесь ваше имя
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount">Стартовая цена</span>
-                            <span class="lot__cost"><?=$val['lot_price'];?><b class="rub">р</b></span>
+                            <span class="lot__cost"><?=$formated_price = change_format_price($val['lot_price']);?></span>
                         </div>
                         <div class="lot__timer timer">
                             12:23
