@@ -17,6 +17,7 @@
     <ul class="lots__list">
         <!--заполните этот список из массива с товарами-->
         <?php foreach ($lots as $key => $val): ?>
+        <?php $time_to_end = check_lot_endtime($val['lot_data_end']);?>
         <li class="lots__item lot">
             <div class="lot__image">
                 <img src="<?=check_data($val['lot_url_image'] ?? "");?>" width="350" height="260" alt="<?=check_data($val['lot_name'] ?? "");?>">
@@ -29,8 +30,8 @@
                         <span class="lot__amount">Стартовая цена</span>
                         <span class="lot__cost"><?=check_data($formated_price = change_format_price($val['lot_price'] ?? ""));?></span>
                     </div>
-                    <div class="lot__timer timer">
-                        12:23
+                    <div class="lot__timer timer <?php if ($time_to_end[0] == 0): ?>timer--finishing<?php endif ?>">
+                        <?=$lot_end_time = $time_to_end[0] . ":" . $time_to_end[1];?>
                     </div>
                 </div>
             </div>

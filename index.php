@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set("Europe/Moscow");
+setlocale(LC_ALL, 'ru_RU');
 
 require_once('functions.php');
 
@@ -10,36 +12,42 @@ $lots = [
       'lot_category' => 'Доски и лыжи',
       'lot_price' => 10999,
       'lot_url_image' => 'img/lot-1.jpg',
+      'lot_data_end' => '2020-09-09',
     ],
     [
         'lot_name' => 'DC Ply Mens 2016/2017 Snowboard',
         'lot_category' => 'Доски и лыжи',
         'lot_price' => 159999,
         'lot_url_image' => 'img/lot-2.jpg',
+        'lot_data_end' => '2020-09-16',
     ],
     [
         'lot_name' => 'Крепления Union Contact Pro 2015 года размер L/XL',
         'lot_category' => 'Крепления',
         'lot_price' => 8000,
         'lot_url_image' => 'img/lot-3.jpg',
+        'lot_data_end' => '2020-09-17',
     ],
     [
         'lot_name' => 'Ботинки для сноуборда DC Mutiny Charocal',
         'lot_category' => 'Ботинки',
         'lot_price' => 10999,
         'lot_url_image' => 'img/lot-4.jpg',
+        'lot_data_end' => '2020-09-18',
     ],
     [
         'lot_name' => 'Куртка для сноуборда DC Mutiny Charocal',
         'lot_category' => 'Одежда',
         'lot_price' => 7500,
         'lot_url_image' => 'img/lot-5.jpg',
+        'lot_data_end' => '2020-09-19',
     ],
     [
         'lot_name' => 'Маска Oakley Canopy',
         'lot_category' => 'Разное',
         'lot_price' => 1400,
         'lot_url_image' => 'img/lot-6.jpg',
+        'lot_data_end' => '2020-09-20',
     ],
 ];
 $user_name = 'Олег'; // укажите здесь ваше имя
@@ -53,6 +61,19 @@ function change_format_price($old_format_price) {
 function check_data($in_data) {
     $sec_data = htmlspecialchars($in_data);
     return $sec_data;
+}
+
+function check_lot_endtime($in_end_time) {
+    $dt_end = date_create($in_end_time);
+    $dt_now = date_create("now");
+    $dt_diff = date_diff($dt_end, $dt_now);
+    $days_temp = date_interval_format($dt_diff, "%a");
+    $days_count[] = date_interval_format($dt_diff, "%H");
+    $days_count[] = date_interval_format($dt_diff, "%I");
+    if($days_temp > 0){
+        $days_count[0] += $days_temp * 24;
+    }
+    return $days_count;
 }
 
 $page_content = include_template('main.php', [
