@@ -1,0 +1,41 @@
+CREATE DATABASE AuctionDB;
+USE AuctionDB;
+
+CREATE TABLE categories (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  cat_name VARCHAR(32) NOT NULL UNIQUE,
+  cat_code VARCHAR(32) NOT NULL UNIQUE
+);
+
+CREATE TABLE lots (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  lot_name VARCHAR(64) NOT NULL,
+  description TEXT NULL,
+  image VARCHAR(128),
+  start_price INT NOT NULL,
+  bid_increment INT NOT NULL DEFAULT 100,
+  owner_id INT NOT NULL,
+  winner_id INT,
+  cat_id INT NOT NULL,
+  dt_create TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  dt_end TIMESTAMP
+);
+
+CREATE TABLE bids (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  lot_id INT NOT NULL,
+  user_id INT NOT NULL,
+  price INT NOT NULL,
+  dt_bids TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(64) NOT NULL UNIQUE,
+  username VARCHAR(64) NOT NULL UNIQUE,
+  password CHAR(32) NOT NULL,
+  contact TEXT,
+  owner_lot_id INT,
+  bid_id INT,
+  dt_registration TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
