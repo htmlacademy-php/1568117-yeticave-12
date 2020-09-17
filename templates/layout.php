@@ -53,7 +53,7 @@
             <!--заполните этот список из массива категорий-->
             <?php foreach ($category_description as $value): ?>
             <li class="nav__item">
-                <a href="pages/all-lots.html"><?=check_data($value);?></a>
+                <a href="pages/all-lots.html"><?=check_data($value['cat_name'] ?? "");?></a>
             </li>
             <?php endforeach; ?>
         </ul>
