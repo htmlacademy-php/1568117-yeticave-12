@@ -3,10 +3,18 @@ date_default_timezone_set("Europe/Moscow");
 setlocale(LC_ALL, 'ru_RU');
 
 require_once('functions.php');
+$con = mysqli_connect("localhost", "root", "Infosec", "auctiondb");
+mysqli_set_charset($con, "utf8");
+$sql_req_cat = "SELECT cat_name, cat_code FROM categories";
+$sql_data_categories = mysqli_query($con, $sql_req_cat);
+$category_description = mysqli_fetch_all($sql_data_categories, MYSQLI_ASSOC);
+$sql_req_lot = "SELECT lots.lot_name, lots.image, lots.price, lots.dt_end, categories.cat_name FROM lots INNER JOIN categories on lots.cat_id = categories.id WHERE lots.dt_create > DATE_SUB(NOW(), INTERVAL 1 DAY)";
+$sql_data_lots = mysqli_query($con, $sql_req_lot);
+$lots = mysqli_fetch_all($sql_data_lots, MYSQLI_ASSOC);
 
 $is_auth = rand(0, 1);
-$category_description = ['Доски и лыжи', 'Крепления', 'Ботинки', 'Одежда', 'Инструменты', 'Разное'];
-$lots = [
+$category_description_old = ['Доски и лыжи', 'Крепления', 'Ботинки', 'Одежда', 'Инструменты', 'Разное'];
+$lots_old = [
     [
       'lot_name' => '2014 Rossignol District Snowboard',
       'lot_category' => 'Доски и лыжи',
