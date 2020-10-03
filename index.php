@@ -8,7 +8,7 @@ mysqli_set_charset($con, "utf8");
 $sql_req_cat = "SELECT cat_name, cat_code FROM categories";
 $sql_data_categories = mysqli_query($con, $sql_req_cat);
 $category_description = mysqli_fetch_all($sql_data_categories, MYSQLI_ASSOC);
-$sql_req_lot = "SELECT lots.lot_name, lots.image, lots.price, lots.dt_end, categories.cat_name FROM lots INNER JOIN categories on lots.cat_id = categories.id WHERE lots.dt_create > DATE_SUB(NOW(), INTERVAL 1 DAY)";
+$sql_req_lot = "SELECT lots.lot_name, lots.image, lots.id, lots.price, lots.dt_end, categories.cat_name FROM lots INNER JOIN categories on lots.cat_id = categories.id WHERE lots.dt_create > DATE_SUB(NOW(), INTERVAL 20 DAY) ORDER BY lots.id";
 $sql_data_lots = mysqli_query($con, $sql_req_lot);
 $lots = mysqli_fetch_all($sql_data_lots, MYSQLI_ASSOC);
 
