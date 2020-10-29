@@ -60,6 +60,7 @@ function db_get_prepare_stmt($link, $sql, $data = []) {
             }
         }
 
+
         $values = array_merge([$stmt, $types], $stmt_data);
 
         $func = 'mysqli_stmt_bind_param';
@@ -70,7 +71,6 @@ function db_get_prepare_stmt($link, $sql, $data = []) {
             die($errorMsg);
         }
     }
-
     return $stmt;
 }
 
